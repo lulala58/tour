@@ -11,13 +11,13 @@
     <title>{{ config('app.name', '旅游') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/bootstrap.css"/>
+
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/animate.min.css"/>
-
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
     <style>
         .navbar{
             margin-bottom:0;
@@ -25,13 +25,26 @@
         .admin{
             margin-right:7px
         }
+        .content , .panel{
+            margin-left: -50px;
+        }
+        textarea{
+            resize: none;
+        }
+        p{text-indent: 2em;}
+        .rowbox{float: left}
+        .img{
+            margin: 50px 0;
+        }
+        img{
+            width: 100%;
+        }
+        .img h3{
+            color: #333333;
+            font-weight: 700;
+        }
     </style>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/swiper-4.3.3.min.js"></script>
 
-
-    <script src="js/respond.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -63,8 +76,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-backward admin"></span>精选路线 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">国内旅游精选路线</a></li>
-                                <li><a href="#">国外旅游精选路线</a></li>
+                                <li><a href="/tour/guid/1"><span class="glyphicon glyphicon-plane admin"></span>国内旅游精选路线</a></li>
+                                <li><a href="/tour/guid/2"><span class="glyphicon glyphicon-plane admin"></span>国外旅游精选路线</a></li>
                             </ul>
                         </li>
 
@@ -72,8 +85,8 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-send admin"></span>旅游攻略 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">国内旅游攻略</a></li>
-                                <li><a href="#">国外旅游攻略</a></li>
+                                <li><a href="/tour/type/1"><span class="glyphicon glyphicon-leaf admin"></span>国内旅游攻略</a></li>
+                                <li><a href="/tour/type/2"><span class="glyphicon glyphicon-leaf admin"></span>国外旅游攻略</a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span class="glyphicon glyphicon-phone-alt admin"></span>联系我们</a></li>
@@ -84,8 +97,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @guest
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">登录</a></li>
+                        <li><a href="{{ route('register') }}">注册</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
@@ -113,8 +126,13 @@
             </div>
         </div>
     </nav>
+    @section('sidebar')
+        @include('layouts.banner')
+    @show
 
-
+</div>
+<div class="container">
+    @yield('content')
 </div>
 {{--footer--}}
 <div id="fh5co-started">
@@ -124,7 +142,7 @@
         <div class="row animate-box ding">
             <div class="col-md-2 col-xs-4 col-sm-2  fh5co-heading tu" style="text-align: center;">
 
-                <img src="images/1111.png" />
+                <img src="/images/1111.png" />
 
             </div>
             <div class="col-md-7 col-xs-8 col-sm-7   fh5co-heading tu">
@@ -165,6 +183,12 @@
     </section>
 </footer>
 
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/swiper-4.3.3.min.js')}}"></script>
+<script src="{{ asset('js/respond.min.js')}}"></script>
 <script>
     var mySwiper = new Swiper('.swiper-container', {
         speed:300,
@@ -180,14 +204,6 @@
         },
     })
 </script>
-<!-- Scripts -->
-{{--<script src="{{ asset('js/app.js') }}"></script>--}}
-
-    {{--<!-- Scripts -->--}}
-{{--    <script src="{{ asset('js/app.js') }}"></script>--}}
-
-
-
 
 </body>
 </html>
